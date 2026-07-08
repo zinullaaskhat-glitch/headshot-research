@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HS RESEARCH - Android</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+        body{background:#0a0a0a;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px}
+        .контейнер{max-width:420px;width:100%;background:#141414;border:2px solid #2a2a2a;border-radius:24px;padding:20px 16px;text-align:center;max-height:95vh;overflow-y:auto}
+        .контейнер::-webkit-scrollbar{width:3px}
+        .контейнер::-webkit-scrollbar-track{background:#111;border-radius:10px}
+        .контейнер::-webkit-scrollbar-thumb{background:#ff3b30;border-radius:10px}
+        .тақырып{font-size:22px;font-weight:900;color:#fff;letter-spacing:1px}
+        .тақырып span{color:#ff3b30;text-shadow:0 0 30px rgba(255,59,48,0.7)}
+        .асты{color:#666;font-size:10px;letter-spacing:2px;margin-bottom:12px;border-bottom:1px solid #222;padding-bottom:10px}
+        .ескерту{background:rgba(255,59,48,0.08);border:1px solid rgba(255,59,48,0.15);border-radius:10px;padding:8px;margin-bottom:12px;color:#ff6b6b;font-size:10px;text-align:center}
+        .карта{background:#111;border:1px solid #222;border-radius:14px;padding:14px;margin-bottom:12px;text-align:left}
+        .карта-атау{color:#ff3b30;font-size:13px;font-weight:700;margin-bottom:6px}
+        .карта-жол{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:12px;color:#ddd}
+        .карта-жол:last-child{border-bottom:none}
+        .қосқыш-жол{display:flex;justify-content:space-between;align-items:center;background:#111;border:1px solid #222;border-radius:14px;padding:12px 16px;margin-bottom:10px}
+        .қосқыш-жазу{color:#ddd;font-size:14px;font-weight:600;text-align:left}
+        .қосқыш-жазу small{display:block;color:#555;font-size:10px;font-weight:400}
+        .қосқыш{position:relative;width:46px;height:24px;flex-shrink:0}
+        .қосқыш input{opacity:0;width:0;height:0}
+        .сырғытпа{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#2a2a2a;border-radius:24px;transition:0.3s}
+        .сырғытпа::before{content:"";position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#666;border-radius:50%;transition:0.3s}
+        input:checked + .сырғытпа{background:#ff3b30;box-shadow:0 0 20px rgba(255,59,48,0.7)}
+        input:checked + .сырғытпа::before{transform:translateX(22px);background:#fff}
+        .батырма{width:100%;padding:16px;background:linear-gradient(180deg,#ff3b30,#cc0000);border:none;border-radius:14px;color:#fff;font-size:18px;font-weight:900;letter-spacing:2px;cursor:pointer;box-shadow:0 6px 30px rgba(255,59,48,0.7);text-transform:uppercase;transition:0.2s}
+        .батырма:active{transform:scale(0.96)}
+        .жүктеу{color:#888;font-size:11px;margin-top:10px;text-align:center}
+        .жүктеу span{color:#ff3b30}
+        .айфон-белгі{color:#666;font-size:9px;margin-top:8px;letter-spacing:1px}
+        .айфон-белгі span{color:#ff3b30}
+        .json-көрініс{background:#0a0a0a;border:1px solid #222;border-radius:10px;padding:10px;margin-top:8px;font-size:11px;color:#888;max-height:150px;overflow-y:auto;text-align:left}
+        .json-көрініс .кілт{color:#ff6b6b}
+        .json-көрініс .мән{color:#00e676}
+    </style>
+</head>
+<body>
+
+<div class="контейнер">
+
+    <div class="тақырып">HS <span>RESEARCH</span></div>
+    <div class="асты">⚡ Android зерттеу құралы</div>
+
+    <div class="ескерту">
+        📌 Бұл тек зерттеу бағдарламасы! Ойынға әсер етпейді.
+    </div>
+
+    <!-- Файл жолы -->
+    <div class="карта">
+        <div class="карта-атау">📁 Файл орналасуы</div>
+        <div class="карта-жол"><span>Android путь</span><span style="color:#00e676;font-size:11px">/Android/data/com.dts.freefireth/files/</span></div>
+        <div class="карта-жол"><span>Config файлы</span><span style="color:#00e676;font-size:11px">config.ini</span></div>
+        <div class="карта-жол"><span>Сезімталдық</span><span style="color:#ff3b30">95%</span></div>
+    </div>
+
+    <!-- JSON көрініс -->
+    <div class="json-көрініс" id="jsonView">
+        <div><span class="кілт">"version"</span>: <span class="мән">"2.0"</span></div>
+        <div><span class="кілт">"device"</span>: <span class="мән">"Android"</span></div>
+        <div><span class="кілт">"headshot"</span>: <span class="мән">80</span></div>
+        <div><span class="кілт">"aimbot"</span>: <span class="мән">"true"</span></div>
+        <div><span class="кілт">"sensitivity"</span>: {</div>
+        <div style="padding-left:16px"><span class="кілт">"general"</span>: <span class="мән">95</span></div>
+        <div style="padding-left:16px"><span class="кілт">"redDot"</span>: <span class="мән">90</span></div>
+        <div style="padding-left:16px"><span class="кілт">"scope2x"</span>: <span class="мән">85</span></div>
+        <div style="padding-left:16px"><span class="кілт">"scope4x"</span>: <span class="мән">75</span></div>
+        <div>}</div>
+        <div><span class="кілт">"antiBan"</span>: <span class="мән">"true"</span></div>
+    </div>
+
+    <!-- Қосқыштар -->
+    <div style="margin:10px 0 8px;text-align:left;color:#888;font-size:11px;font-weight:bold;border-left:3px solid #ff3b30;padding-left:10px">⚙️ ЗЕРТТЕУ РЕЖИМДЕРІ</div>
+
+    <div class="қосқыш-жол">
+        <div class="қосқыш-жазу">📊 Файл құрылымы<small>Android config талдау</small></div>
+        <label class="қосқыш"><input type="checkbox" checked><span class="сырғытпа"></span></label>
+    </div>
+
+    <div class="қосқыш-жол">
+        <div class="қосқыш-жазу">🔍 Параметрлер<small>Мәндерді оқу</small></div>
+        <label class="қосқыш"><input type="checkbox" checked><span class="сырғытпа"></span></label>
+    </div>
+
+    <div class="қосқыш-жол">
+        <div class="қосқыш-жазу">📈 80% хедшот<small>Логиканы зерттеу</small></div>
+        <label class="қосқыш"><input type="checkbox"><span class="сырғытпа"></span></label>
+    </div>
+
+    <div class="қосқыш-жол">
+        <div class="қосқыш-жазу">🛡️ Анти-бан<small>Қорғаныс механизмі</small></div>
+        <label class="қосқыш"><input type="checkbox" checked><span class="сырғытпа"></span></label>
+    </div>
+
+    <!-- Батырма -->
+    <button class="батырма" onclick="зерттеу()">🔍 ЗЕРТТЕУ</button>
+
+    <div class="жүктеу" id="статус">⚡ <span>Зерттеуге дайын</span></div>
+
+    <div class="айфон-белгі">📱 <span>Android</span> • Зерттеу құралы</div>
+
+</div>
+
+<script>
+    function зерттеу() {
+        var статус = document.getElementById('статус');
+        var json = document.getElementById('jsonView');
+        
+        статус.innerHTML = '⏳ <span>Файл талдануда...</span>';
+        
+        setTimeout(function() {
+            // JSON көрінісін жаңарту
+            json.innerHTML = `
+                <div><span class="кілт">"version"</span>: <span class="мән">"2.0"</span></div>
+                <div><span class="кілт">"device"</span>: <span class="мән">"Android"</span></div>
+                <div><span class="кілт">"headshot"</span>: <span class="мән">80</span></div>
+                <div><span class="кілт">"aimbot"</span>: <span class="мән">"true"</span></div>
+                <div><span class="кілт">"antiBan"</span>: <span class="мән">"active"</span></div>
+                <div><span class="кілт">"status"</span>: <span class="мән">"✅ Талданды"</span></div>
+            `;
+            статус.innerHTML = '✅ <span>Зерттеу аяқталды! 80% хедшот логикасы талданды.</span>';
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
